@@ -1,5 +1,5 @@
 data:
-  root_path: '../aac-models/data'
+  root_path: 'data'
   input_path: 'clotho_v2'
   output_path: 'clotho_v2_vggish'
   splits:

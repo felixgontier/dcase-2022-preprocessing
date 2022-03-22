@@ -6,6 +6,7 @@ import torch
 import librosa as lr
 import yaml
 import argparse
+import string
 
 def preprocess_dataset(config):
     with open('data_settings/{}.yaml'.format(config.cfg), 'r') as f:
@@ -40,6 +41,10 @@ def preprocess_dataset(config):
                 if data_path.joinpath(file_name) in audio_list:
                     # Get captions
                     captions = ex[1:]
+                    
+                    # Pre-process captions
+                    # Remove punctuation, lowercase
+                    captions = [c.translate(str.maketrans('', '', string.punctuation)).lower() for c in captions]
                     
                     # Compute VGGish embeddings
                     vggish_embeddings = vggish_model.forward(str(data_path.joinpath(file_name))).detach().numpy()
@@ -81,7 +86,7 @@ def preprocess_dataset(config):
                 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, default='default', help='YAML configuration file for dataset pre-processing')
+    parser.add_argument('--cfg', type=str, default='dcb_data', help='YAML configuration file for dataset pre-processing')
     config = parser.parse_args()
     preprocess_dataset(config)
     
