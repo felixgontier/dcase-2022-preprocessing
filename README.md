@@ -1,6 +1,6 @@
 # Pre-processing tools for the DCASE 2022 task 6-A
 
-This repository contains data pre-processing tools used in the baseline.
+This repository contains the data pre-processing tools used in the baseline. These tools are already included in the [baseline repository](https://github.com/felixgontier/dcase-2022-baseline).
 
 ## Setup
 
